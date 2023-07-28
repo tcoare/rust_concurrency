@@ -40,16 +40,7 @@ The **thread-based approach** uses threads, allowing us to achieve true parallel
 
 ## How to Run the Example
 
-1. Ensure you have Rust installed on your system.
-
-2. Copy and paste the code from `ConcurrentExample.rs` into a new file named `main.rs`.
-
-3. Add the following dependencies to your `Cargo.toml` file:
-
-```toml
-[dependencies]
-tokio = { version = "1", features = ["full"] }
-```
+1. Ensure you have Rust and cargo installed on your system.
 
 Run the example using the following command:
 
