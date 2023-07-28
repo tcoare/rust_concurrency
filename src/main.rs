@@ -62,3 +62,36 @@ fn main() {
     let elapsed_time_thread = start_time_thread.elapsed();
     println!("Time taken (thread): {:?}", elapsed_time_thread);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::time::Instant;
+
+    #[test]
+    fn test_factorial_async() {
+        let n = 10;
+        let start_time_async = Instant::now();
+        let result = factorial_async(n);
+        let elapsed_time_async = start_time_async.elapsed();
+
+        // Assert the correct result and that it took a reasonable amount of time
+        assert_eq!(
+            tokio::runtime::Runtime::new().unwrap().block_on(result),
+            3_628_800
+        );
+        assert!(elapsed_time_async < std::time::Duration::from_secs(1));
+    }
+
+    #[test]
+    fn test_factorial_thread() {
+        let n = 10;
+        let start_time_thread = Instant::now();
+        let result = factorial(n);
+        let elapsed_time_thread = start_time_thread.elapsed();
+
+        // Assert the correct result and that it took a reasonable amount of time
+        assert_eq!(result, 3_628_800);
+        assert!(elapsed_time_thread < std::time::Duration::from_secs(1));
+    }
+}
